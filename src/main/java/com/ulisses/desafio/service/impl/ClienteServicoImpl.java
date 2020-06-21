@@ -84,7 +84,7 @@ public class ClienteServicoImpl implements ClienteService {
 			throw new RegraNegocioException("Informe um cpf válido.");
 		}
 		
-		if(cliente.getTelefone() == null) {
+		if(cliente.getTelefones()  == null) {
 			throw new RegraNegocioException("Informe um telefone.");
 		}
 		

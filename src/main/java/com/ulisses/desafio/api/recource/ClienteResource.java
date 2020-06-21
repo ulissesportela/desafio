@@ -1,5 +1,6 @@
 package com.ulisses.desafio.api.recource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ulisses.desafio.api.dto.ClienteDTO;
 import com.ulisses.desafio.exception.RegraNegocioException;
 import com.ulisses.desafio.model.entity.Cliente;
+import com.ulisses.desafio.model.entity.Telefone;
 import com.ulisses.desafio.service.ClienteService;
 
 import lombok.RequiredArgsConstructor;
@@ -89,11 +91,14 @@ public class ClienteResource {
 	
 	private Cliente converter(ClienteDTO dto) {
 		
+		//List<Telefone> telefones = new ArrayList<>();
+		
+		
 		Cliente cliente = Cliente.builder()
 				.id(dto.getId())
 				.nome(dto.getNome())
 				.cpf(dto.getCpf())
-				.telefone(dto.getTelefone())
+				.telefones(dto.getTelefones())
 				.email(dto.getEmail())
 				.cep(dto.getCep())
 				.logradouro(dto.getLogradouro())
@@ -109,7 +114,7 @@ public class ClienteResource {
 				.id(cliente.getId())
 				.nome(cliente.getNome())
 				.cpf(cliente.getCpf())
-				.telefone(cliente.getTelefone())
+				.telefones(cliente.getTelefones())
 				.email(cliente.getEmail())
 				.cep(cliente.getCep())
 				.logradouro(cliente.getLogradouro())

@@ -38,7 +38,6 @@ CREATE TABLE desafio.telefone
 (
   id bigserial NOT NULL PRIMARY KEY ,
   telefone character varying(11) NOT NULL,
-  tipo character varying(11) CHECK (tipo IN ('RESIDENCIAL', 'COMERCIAL', 'CELULAR')) NOT NULL,
   id_cliente bigint REFERENCES desafio.cliente (id) NOT NULL,
   data_cadastro date DEFAULT NOW()
 );
