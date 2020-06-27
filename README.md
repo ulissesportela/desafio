@@ -10,12 +10,12 @@ Estou atualizando!
 
 ## 📘 API endpoints
 ### 😎 Clientes ClienteResource
-* Listar: GET /api/clientes
-* Buscar: GET /api/clientes/8
-* Adicionar: POST /api/clientes
-* Excluir: DEL /api/clientes/13
-* Atualizar: PUT /api/clientes/13
-JSON:
+* GET /api/clientes - Lista os clientes.
+* GET /api/clientes/1 - Obtém os dados do cliente 1.
+* POST /api/clientes - Cria um novo cliente.
+* PUT /api/clientes/1 - Altera o cliente 1.
+* DELETE /api/clientes/1 - Remove o cliente 1.
+
 ```json
 {
 	"nome": "Cliente 2",
