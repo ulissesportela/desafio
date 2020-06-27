@@ -10,11 +10,12 @@ Estou atualizando!
 
 ## 📘 API endpoints
 ### 😎 Clientes ClienteResource
-#### GET
-* Clientes - Listar: /api/clientes
-* Clientes - Buscar: /api/clientes/8
-#### POST
-* Clientes - Adicionar: /api/clientes
+* Listar: GET /api/clientes
+* Buscar: GET /api/clientes/8
+* Adicionar: POST /api/clientes
+* Excluir: DEL /api/clientes/13
+* Atualizar: PUT /api/clientes/13
+JSON:
 ```json
 {
 	"nome": "Cliente 2",
@@ -36,31 +37,7 @@ Estou atualizando!
 	"uf": "uf"
 }
 ```
-### PUT
-* Clientes - Atualizar: /api/clientes/13
-```json
-{
-	"nome": "Cliente 2",
-	"cpf": "58448991435",
-	"telefones": [
-		{
-		"telefone": "123"
-		},
-		{
-		"telefone": "456"
-		}
-	],
-	"email":  "2019",
-	"cep": "",
-	"logradouro": "logradouro",
-	"bairro": "bairro",
-	"complemento": "complemento",
-	"cidade": "cidade",
-	"uf": "uf"
-}
-```
-### DEL
-* Escluir Cliente - Excluir: /api/clientes/13
+
 
 [Spring Framework]: <https://spring.io/projects/spring-framework>
 [PostgreSQL]: <https://www.postgresql.org>
