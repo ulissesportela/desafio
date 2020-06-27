@@ -9,7 +9,6 @@ Estou atualizando!
 * [PostgreSQL]: Sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto.
 
 ## 📘 API endpoints
-### 😎 Clientes ClienteResource
 * GET /api/clientes - Lista os clientes.
 * GET /api/clientes/1 - Obtém os dados do cliente 1.
 * POST /api/clientes - Cria um novo cliente.
