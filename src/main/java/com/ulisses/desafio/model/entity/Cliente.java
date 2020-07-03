@@ -3,13 +3,7 @@ package com.ulisses.desafio.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="cliente", schema="desafio")
+@Table(name="Cliente", catalog="postgres", schema="desafio")
 @Builder
 @Data
 @NoArgsConstructor
@@ -34,10 +28,7 @@ public class Cliente {
 		
 		@Column(name="cpf")
 		private String cpf;
-		
-		@OneToMany(mappedBy = "cliente")
-		private List<Telefone> telefones = new ArrayList<>();
-		
+
 		@Column(name="email")
 		private String email;
 		

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name="usuario", schema="desafio")
+@Table(name="Usuario", catalog="postgres", schema="desafio")
 @Builder
 @Data
 @NoArgsConstructor

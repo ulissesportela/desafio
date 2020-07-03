@@ -83,11 +83,7 @@ public class ClienteServicoImpl implements ClienteService {
 		if(cliente.getCpf() == null || cliente.getCpf().toString().length() != 11 ) {
 			throw new RegraNegocioException("Informe um cpf válido.");
 		}
-		
-		if(cliente.getTelefones()  == null) {
-			throw new RegraNegocioException("Informe um telefone.");
-		}
-		
+
 		if(cliente.getEmail() == null) {
 			throw new RegraNegocioException("Informe um email.");
 		}

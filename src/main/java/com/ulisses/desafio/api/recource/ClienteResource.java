@@ -1,8 +1,9 @@
 package com.ulisses.desafio.api.recource;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.ulisses.desafio.model.entity.Telefone;
+import com.ulisses.desafio.service.TelefoneService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ulisses.desafio.api.dto.ClienteDTO;
 import com.ulisses.desafio.exception.RegraNegocioException;
 import com.ulisses.desafio.model.entity.Cliente;
-import com.ulisses.desafio.model.entity.Telefone;
 import com.ulisses.desafio.service.ClienteService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,8 @@ import lombok.RequiredArgsConstructor;
 public class ClienteResource {
 
 	private final ClienteService service;
-	
+	private final TelefoneService telefoneService;
+
 	@GetMapping
 	public ResponseEntity buscar(
 			@RequestParam(value="nome", required = false) String nome,
@@ -59,6 +60,10 @@ public class ClienteResource {
 
 		try {
 			Cliente clienteSalvo = service.salvar(cliente);
+			for (Telefone telefone:dto.getTelefones()) {
+				telefone.setCliente(clienteSalvo);
+				telefoneService.salvar(telefone);
+			}
 			return new ResponseEntity(clienteSalvo, HttpStatus.CREATED);
 		} catch (RegraNegocioException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
@@ -98,7 +103,6 @@ public class ClienteResource {
 				.id(dto.getId())
 				.nome(dto.getNome())
 				.cpf(dto.getCpf())
-				.telefones(dto.getTelefones())
 				.email(dto.getEmail())
 				.cep(dto.getCep())
 				.logradouro(dto.getLogradouro())
@@ -114,7 +118,6 @@ public class ClienteResource {
 				.id(cliente.getId())
 				.nome(cliente.getNome())
 				.cpf(cliente.getCpf())
-				.telefones(cliente.getTelefones())
 				.email(cliente.getEmail())
 				.cep(cliente.getCep())
 				.logradouro(cliente.getLogradouro())
