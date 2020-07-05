@@ -38,7 +38,7 @@ CREATE TABLE desafio.telefone
 (
   id bigserial NOT NULL PRIMARY KEY ,
   telefone character varying(11) NOT NULL,
-  id_cliente bigint REFERENCES desafio.cliente (id) NOT NULL,
+  cliente_id bigint REFERENCES desafio.cliente (id) NOT NULL,
   data_cadastro date DEFAULT NOW()
 );
 
@@ -46,6 +46,6 @@ CREATE TABLE desafio.email
 (
   id bigserial NOT NULL PRIMARY KEY ,
   email character varying(100) NOT NULL,
-  id_cliente bigint REFERENCES desafio.cliente (id) NOT NULL,
+  cliente_id bigint REFERENCES desafio.cliente (id) NOT NULL,
   data_cadastro date DEFAULT NOW()
 );
