@@ -2,8 +2,6 @@ package com.ulisses.desafio.api.recource;
 
 import java.util.List;
 
-import com.ulisses.desafio.model.entity.Telefone;
-import com.ulisses.desafio.service.TelefoneService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ulisses.desafio.api.dto.ClienteDTO;
 import com.ulisses.desafio.exception.RegraNegocioException;
 import com.ulisses.desafio.model.entity.Cliente;
+import com.ulisses.desafio.model.entity.Email;
+import com.ulisses.desafio.model.entity.Telefone;
 import com.ulisses.desafio.service.ClienteService;
+import com.ulisses.desafio.service.EmailService;
+import com.ulisses.desafio.service.TelefoneService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +32,7 @@ public class ClienteResource {
 
 	private final ClienteService service;
 	private final TelefoneService telefoneService;
+	private final EmailService emailService;
 
 	@GetMapping
 	public ResponseEntity buscar(
@@ -40,7 +43,7 @@ public class ClienteResource {
 		Cliente clienteFiltro = new Cliente();
 		clienteFiltro.setNome(nome);
 		clienteFiltro.setCpf(cpf);
-		clienteFiltro.setEmail(email);
+		//clienteFiltro.setEmail(email);
 		
 		List<Cliente> clientes =  service.buscar(clienteFiltro);
 		return ResponseEntity.ok(clientes);
@@ -48,16 +51,18 @@ public class ClienteResource {
 	
 	@GetMapping("{id}")
 	public ResponseEntity obterCliente( @PathVariable("id") Long id ) {
+
 		return service.obterPorId(id)
 				.map( cliente -> new ResponseEntity(converter(cliente), HttpStatus.OK) )
 				.orElseGet( () -> new ResponseEntity(HttpStatus.NOT_FOUND) );
-}
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity salvar( @RequestBody ClienteDTO dto) {
 		
 		Cliente cliente = converter(dto);
-		System.out.println(dto.toString());
+		//System.out.println(dto.toString());
 		try {
 			
 			Cliente clienteSalvo = service.salvar(cliente);
@@ -66,6 +71,11 @@ public class ClienteResource {
 				telefone.setCliente(clienteSalvo);
 				
 				telefoneService.salvar(telefone);
+			}
+			for (Email email:dto.getEmails()) {
+				email.setCliente(clienteSalvo);
+				
+				emailService.salvar(email);
 			}
 			return new ResponseEntity(clienteSalvo, HttpStatus.CREATED);
 		} catch (RegraNegocioException e) {
@@ -77,9 +87,26 @@ public class ClienteResource {
 	public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody ClienteDTO dto) {
 		return service.obterPorId(id).map(entity -> {
 			try {
+				System.out.println("teste");
 				Cliente cliente = converter(dto);
 				cliente.setId(entity.getId());
 				service.atualizar(cliente);
+
+						
+				telefoneService.apagarVinculo(cliente.getId());
+				emailService.apagarVinculo(cliente.getId());
+				
+				for (Telefone telefone:dto.getTelefones()) {
+					telefone.setCliente(cliente);
+					
+					telefoneService.salvar(telefone);
+				}
+				for (Email email:dto.getEmails()) {
+					email.setCliente(cliente);
+					
+					emailService.salvar(email);
+				}
+				
 				return ResponseEntity.ok(cliente);
 			} catch (RegraNegocioException e) {
 				return ResponseEntity.badRequest().body(e.getMessage());
@@ -92,6 +119,8 @@ public class ClienteResource {
 	@DeleteMapping("{id}")
 	public ResponseEntity deletar( @PathVariable("id") Long id) {
 		return service.obterPorId(id).map( entity -> {
+			telefoneService.apagarVinculo(id);
+			emailService.apagarVinculo(id);
 			service.deletar(entity);
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}).orElseGet( () -> new ResponseEntity("Cliente não encontrado.", HttpStatus.BAD_REQUEST));
@@ -106,7 +135,6 @@ public class ClienteResource {
 				.id(dto.getId())
 				.nome(dto.getNome())
 				.cpf(dto.getCpf())
-				.email(dto.getEmail())
 				.cep(dto.getCep())
 				.logradouro(dto.getLogradouro())
 				.bairro(dto.getBairro())
@@ -121,13 +149,15 @@ public class ClienteResource {
 				.id(cliente.getId())
 				.nome(cliente.getNome())
 				.cpf(cliente.getCpf())
-				.email(cliente.getEmail())
 				.cep(cliente.getCep())
 				.logradouro(cliente.getLogradouro())
 				.bairro(cliente.getBairro())
 				.complemento(cliente.getComplemento())
 				.cidade(cliente.getCidade())
+				.telefonesDTO(telefoneService.lista(cliente.getId()))
+				.emailsDTO(emailService.lista(cliente.getId()))
 				.uf(cliente.getUf()).build();
-					
 	}
+
+	
 }

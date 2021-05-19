@@ -1,7 +1,8 @@
 package com.ulisses.desafio.model.repository;
 
+import com.ulisses.desafio.api.dto.EmailDTO;
 import com.ulisses.desafio.api.dto.TelefoneDTO;
-import com.ulisses.desafio.model.entity.Telefone;
+import com.ulisses.desafio.model.entity.Email;
 
 import java.util.List;
 
@@ -12,16 +13,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface TelefoneRepository extends JpaRepository<Telefone, Long> {
+public interface EmailRepository extends JpaRepository<Email, Long> {
 
 	@Transactional
 	@Modifying
-	@Query("DELETE FROM Telefone t"
-			+ " WHERE t.cliente.id = :clienteId")
+	@Query("DELETE FROM Email e"
+			+ " WHERE e.cliente.id = :clienteId")
 	void apagarVinculo(Long clienteId);
 	
-	@Query("SELECT NEW com.ulisses.desafio.api.dto.TelefoneDTO(t.id, t.telefone, t.tipo) FROM Telefone t"
-			+ " WHERE t.cliente.id = :clienteId")
-	List<TelefoneDTO> lista(Long clienteId);
-	
+	@Query("SELECT NEW com.ulisses.desafio.api.dto.EmailDTO(e.id, e.email) FROM Email e"
+			+ " WHERE e.cliente.id = :clienteId")
+	List<EmailDTO> lista(Long clienteId);
 }

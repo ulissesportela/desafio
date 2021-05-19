@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ulisses.desafio.model.entity.Cliente;
+import com.ulisses.desafio.model.entity.Email;
+import com.ulisses.desafio.model.entity.Telefone;
 
 public interface ClienteService {
 	Cliente salvar(Cliente cliente);
@@ -19,5 +21,9 @@ public interface ClienteService {
 	void validaClienteJaCadastrado(String cpf);
 	
 	Optional<Cliente> obterPorId(Long id);
+	
+	Optional<Telefone> obterTelefonesPorId(Long id);
+	
+	Optional<Email> obterEmailsPorId(Long id);
 	
 }

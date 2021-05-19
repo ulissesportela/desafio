@@ -1,6 +1,5 @@
 package com.ulisses.desafio.service.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,13 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ulisses.desafio.exception.RegraNegocioException;
 import com.ulisses.desafio.model.entity.Cliente;
+import com.ulisses.desafio.model.entity.Email;
+import com.ulisses.desafio.model.entity.Telefone;
 import com.ulisses.desafio.model.repository.ClienteRepository;
+import com.ulisses.desafio.model.repository.EmailRepository;
+import com.ulisses.desafio.model.repository.TelefoneRepository;
 import com.ulisses.desafio.service.ClienteService;
 
 @Service
 public class ClienteServicoImpl implements ClienteService {
 
 	private ClienteRepository repository;
+	private TelefoneRepository telefoneRepository;
+	private EmailRepository emailRepository;
 
 	public ClienteServicoImpl(ClienteRepository repository) {
 		this.repository = repository;
@@ -84,9 +89,9 @@ public class ClienteServicoImpl implements ClienteService {
 			throw new RegraNegocioException("Informe um cpf válido.");
 		}
 
-		if(cliente.getEmail() == null) {
-			throw new RegraNegocioException("Informe um email.");
-		}
+		//if(cliente.getEmail() == null) {
+		//	throw new RegraNegocioException("Informe um email.");
+		//}
 		
 		if(cliente.getLogradouro() == null) {
 			throw new RegraNegocioException("Informe um logradouro.");
@@ -107,6 +112,19 @@ public class ClienteServicoImpl implements ClienteService {
 
 	@Override
 	public Optional<Cliente> obterPorId(Long id) {
+		
 		return repository.findById(id);
 	}
+
+	@Override
+	public Optional<Telefone> obterTelefonesPorId(Long id) {
+		return telefoneRepository.findById(id);
+	}
+
+	@Override
+	public Optional<Email> obterEmailsPorId(Long id) {
+		return emailRepository.findById(id);
+	}
+
+	
 }

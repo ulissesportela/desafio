@@ -1,7 +1,5 @@
 package com.ulisses.desafio.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -29,9 +27,6 @@ public class Cliente {
 		@Column(name="cpf")
 		private String cpf;
 
-		@Column(name="email")
-		private String email;
-		
 		@Column(name="cep")
 		private String cep;
 		
@@ -49,7 +44,10 @@ public class Cliente {
 
 		@Column(name="uf")
 		private String uf;
-		
-		
 
+		//@OneToMany(mappedBy = "telefone", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+		//private List<Telefone> telefone;
+		
+		//@OneToMany(mappedBy = "email", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+		//private List<Email> email;
 }

@@ -8,20 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="Telefone", catalog="postgres", schema="desafio")
+@Table(name="Email", catalog="postgres", schema="desafio")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Telefone {
+public class Email {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String telefone;
-	
-	private String tipo;
+	private String email;
 	
 	@ManyToOne
 	@JoinColumn(name="cliente_id")

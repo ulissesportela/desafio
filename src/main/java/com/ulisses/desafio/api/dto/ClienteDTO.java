@@ -2,6 +2,7 @@ package com.ulisses.desafio.api.dto;
 
 import java.util.List;
 
+import com.ulisses.desafio.model.entity.Email;
 import com.ulisses.desafio.model.entity.Telefone;
 
 import lombok.AllArgsConstructor;
@@ -18,16 +19,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ClienteDTO {
-
+ 
 	private Long id;
 	private String nome;
 	private String cpf;
 	private List<Telefone> telefones;
-	private String email;
+	private List<Email> emails;
 	private String cep;
 	private String logradouro;
 	private String bairro;
 	private String complemento;
 	private String cidade;
 	private String uf;
+	private List<TelefoneDTO> telefonesDTO;
+	private List<EmailDTO> emailsDTO;
 }
