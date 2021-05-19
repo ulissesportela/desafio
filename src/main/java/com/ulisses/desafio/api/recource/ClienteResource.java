@@ -57,11 +57,14 @@ public class ClienteResource {
 	public ResponseEntity salvar( @RequestBody ClienteDTO dto) {
 		
 		Cliente cliente = converter(dto);
-
+		System.out.println(dto.toString());
 		try {
+			
 			Cliente clienteSalvo = service.salvar(cliente);
+			
 			for (Telefone telefone:dto.getTelefones()) {
 				telefone.setCliente(clienteSalvo);
+				
 				telefoneService.salvar(telefone);
 			}
 			return new ResponseEntity(clienteSalvo, HttpStatus.CREATED);
