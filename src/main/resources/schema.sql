@@ -18,18 +18,19 @@ INSERT INTO desafio.usuario (usuario, senha) VALUES('comun', '123456');
 
 
 
-CREATE TABLE desafio.cliente
-(
-  id bigserial NOT NULL PRIMARY KEY ,
-  nome character varying(100) NOT NULL,
-  cpf character varying(11) NOT NULL,
-  cep character varying(8) NOT NULL,
-  logradouro character varying(100) NOT NULL,
-  bairro character varying(50) NOT NULL,
-  cidade character varying(50) NOT NULL,
-  uf character varying(2) NOT NULL,
-  complemento character varying(256),
-  data_cadastro date DEFAULT NOW()
+CREATE TABLE desafio.cliente (
+	id bigserial NOT NULL,
+	nome varchar(100) NOT NULL,
+	cpf varchar(11) NOT NULL,
+	cep varchar(8) NOT NULL,
+	logradouro varchar(100) NOT NULL,
+	bairro varchar(50) NOT NULL,
+	cidade varchar(50) NOT NULL,
+	uf varchar(2) NOT NULL,
+	complemento varchar(256) NULL,
+	data_cadastro date NULL DEFAULT now(),
+	email varchar(255) NULL,
+	CONSTRAINT cliente_pkey PRIMARY KEY (id)
 );
 
 
@@ -41,6 +42,7 @@ CREATE TABLE desafio.telefone
   cliente_id bigint REFERENCES desafio.cliente (id) NOT NULL,
   data_cadastro date DEFAULT NOW()
 );
+ALTER TABLE desafio.telefone ADD tipo bigint NULL;
 
 CREATE TABLE desafio.email
 (
