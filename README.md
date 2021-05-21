@@ -1,7 +1,7 @@
 # 🛠 Desafio (Em Atualização)
 Me candidatei a um desafio spring proposto a uma vaga, no back-end.
 API de resposta desenvolvida durante o fim de semana.
-Estou atualizando!
+Atualizando em 15h!
 # 
 
 ## ⚡ Tecnologias
