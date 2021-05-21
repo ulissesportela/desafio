@@ -26,7 +26,7 @@ Estou atualizando!
 		},
 		{
 		"telefone": "456",
-		"tipo: "CE"
+		"tipo": "CE"
 		}
 	],
 	"emails":  [{"email": "teste@teste.com"}, {"email": "ae@ae.com"}],
