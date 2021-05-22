@@ -8,8 +8,6 @@ import com.ulisses.desafio.model.entity.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
-	//Optional<Cliente> fingByCpf(String cpf);
-
 	boolean existsByCpf(String cpf);
 	
 }

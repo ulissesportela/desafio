@@ -43,7 +43,6 @@ public class ClienteResource {
 		Cliente clienteFiltro = new Cliente();
 		clienteFiltro.setNome(nome);
 		clienteFiltro.setCpf(cpf);
-		//clienteFiltro.setEmail(email);
 		
 		List<Cliente> clientes =  service.buscar(clienteFiltro);
 		return ResponseEntity.ok(clientes);
@@ -128,9 +127,7 @@ public class ClienteResource {
 	
 	private Cliente converter(ClienteDTO dto) {
 		
-		//List<Telefone> telefones = new ArrayList<>();
-		
-		
+
 		Cliente cliente = Cliente.builder()
 				.id(dto.getId())
 				.nome(dto.getNome())

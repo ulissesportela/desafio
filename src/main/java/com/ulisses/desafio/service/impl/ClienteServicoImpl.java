@@ -89,10 +89,7 @@ public class ClienteServicoImpl implements ClienteService {
 			throw new RegraNegocioException("Informe um cpf válido.");
 		}
 
-		//if(cliente.getEmail() == null) {
-		//	throw new RegraNegocioException("Informe um email.");
-		//}
-		
+	
 		if(cliente.getLogradouro() == null) {
 			throw new RegraNegocioException("Informe um logradouro.");
 		}
