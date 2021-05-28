@@ -15,6 +15,12 @@ Atualizando em 15h!
 * [Spring Framework]: Plataforma Java que fornece suporte abrangente à infraestrutura para o desenvolvimento de aplicativos Java.
 * [PostgreSQL]: Sistema gerenciador de banco de dados objeto relacional, desenvolvido como projeto de código aberto.
 
+## ⚙️ Depencencias
+* Spring Web
+* Spring Boot DevTools
+* Sprint Data JPA
+* PostgreSQL Driver
+
 ## 📘 API endpoints
 * GET /api/clientes - Lista os clientes.
 * GET /api/clientes/1 - Obtém os dados do cliente 1.
